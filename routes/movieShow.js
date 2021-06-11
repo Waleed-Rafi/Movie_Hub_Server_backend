@@ -15,6 +15,18 @@ router.get("/movies/all", async(req, res) => {
     }
 });
 
+router.get("/movie/find", async(req, res) => {
+    const sql = "SELECT * FROM movie_show WHERE MOV_ID = ?";
+    try {
+        DB.query(sql, [req.query.mov_id], async(err, result) => {
+            if (err) return res.json({ error: "Error: Unable to Fetch Data!" });
+            return res.json({ success: "Successfully Fetched!", data: result });
+        });
+    } catch (error) {
+        return res.json({ error: "Error: Unable to Fetch Data!" });
+    }
+});
+
 router.post(
     "/movie/create", [
         check("MOV_NAME", "Error: Movie Name is invalid").isLength({
@@ -62,7 +74,9 @@ router.put("/movie/update", async(req, res) => {
     try {
         await DB.query(sql, [req.body, req.body.MOV_ID], async(err, result) => {
             if (err)
-                return res.json({ error: "Error: Unable to Update data try again!" });
+                return res.json({
+                    error: "Error: Unable to Update data try again!",
+                });
             return res.json({ success: "Successfully Updated!!" });
         });
     } catch (error) {
