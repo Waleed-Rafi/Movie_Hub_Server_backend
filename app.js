@@ -5,6 +5,7 @@ require("dotenv").config();
 require("./db/sql.js");
 
 const movieShow = require("./routes/movieShow");
+const bookingTicket = require("./routes/bookingTicket");
 
 const cors = require("cors");
 const corsOptions = {
@@ -19,6 +20,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 app.use("/", movieShow);
+app.use("/", bookingTicket);
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}`);
