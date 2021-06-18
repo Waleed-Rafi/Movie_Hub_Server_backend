@@ -7,6 +7,7 @@ require("./db/sql.js");
 const movieShow = require("./routes/movieShow");
 const bookingTicket = require("./routes/bookingTicket");
 const customers = require("./routes/customers");
+const payments = require("./routes/payments");
 
 const cors = require("cors");
 const corsOptions = {
@@ -23,6 +24,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/", movieShow);
 app.use("/", bookingTicket);
 app.use("/", customers);
+app.use("/", payments);
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}`);
